@@ -1,0 +1,69 @@
+---
+/**
+ * Home-page mural teaser. Featured 2-up + 6 highlight tiles + CTA to
+ * the full archive at /gallery. Use <MuralCard> so all tiles open the
+ * Lightbox.
+ */
+import type { PortfolioWork } from '../lib/convex'
+import MuralCard from './MuralCard.astro'
+
+interface Props {
+  murals: PortfolioWork[]
+  teaserCount?: number
+}
+const { murals, teaserCount = 6 } = Astro.props
+const featured = murals.filter((m) => m.isFeatured).slice(0, 2)
+const featuredIds = new Set(featured.map((m) => m._id))
+const teasers = murals.filter((m) => !featuredIds.has(m._id)).slice(0, teaserCount)
+const remaining = Math.max(0, murals.length - featured.length - teasers.length)
+---
+
+<section id="work" class="border-t border-white/5 py-20 md:py-32">
+  <div class="max-page">
+    <div class="flex items-end justify-between mb-12 md:mb-20">
+      <div>
+        <p class="eyebrow text-ember mb-3">The wall</p>
+        <h2 class="font-display italic text-5xl md:text-7xl">Murals</h2>
+      </div>
+      <a
+        href="/gallery"
+        class="hidden md:inline-flex eyebrow text-bone/60 hover:text-ember transition-colors items-center gap-2"
+      >
+        See all <span aria-hidden>→</span>
+      </a>
+    </div>
+
+    {featured.length > 0 && (
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6 mb-10 md:mb-16">
+        {featured.map((m) => (
+          <MuralCard work={m} size="lg" />
+        ))}
+      </div>
+    )}
+
+    {teasers.length > 0 && (
+      <ul class="grid grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
+        {teasers.map((m) => (
+          <li>
+            <MuralCard work={m} />
+          </li>
+        ))}
+      </ul>
+    )}
+
+    <div class="mt-12 md:mt-16 flex flex-col md:flex-row items-start md:items-center gap-4 md:gap-6">
+      <a
+        href="/gallery"
+        class="inline-flex items-center gap-3 bg-bone text-ink px-6 py-4 text-xs tracking-[0.3em] uppercase hover:bg-ember hover:text-ink transition-colors"
+      >
+        Open full gallery
+        <span aria-hidden>→</span>
+      </a>
+      {remaining > 0 && (
+        <p class="eyebrow text-bone/60">
+          {remaining} more in the archive
+        </p>
+      )}
+    </div>
+  </div>
+</section>

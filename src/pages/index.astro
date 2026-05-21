@@ -1,0 +1,77 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro'
+import Nav from '../components/Nav.astro'
+import Hero from '../components/Hero.astro'
+import MuralGallery from '../components/MuralGallery.astro'
+import About from '../components/About.astro'
+import MediumSection from '../components/MediumSection.astro'
+import Press from '../components/Press.astro'
+import Contact from '../components/Contact.astro'
+import Footer from '../components/Footer.astro'
+import Lightbox from '../components/Lightbox.astro'
+import { fetchArtist, fetchWorks, groupByMedium } from '../lib/convex'
+
+let artist = await fetchArtist()
+let works = await fetchWorks()
+
+// Defensive fallback so the site still renders if Convex is unreachable.
+if (!artist) {
+  artist = {
+    _id: 'fallback',
+    slug: 'signe-ditona',
+    displayName: 'Signe Ditona',
+    tagline: 'Muralist. Voice. Storyteller.',
+    bio: 'San Diego muralist, voice artist, and singer.',
+    location: 'San Diego, California',
+    accentColor: '#E8493A',
+    links: [],
+    isPublic: true,
+  }
+}
+
+const grouped = groupByMedium(works)
+---
+
+<BaseLayout
+  title="Signe Ditona · Muralist, Voice, Singer"
+  description={artist.bio?.split('\n\n')[0] ??
+    'Portfolio of Signe Ditona. San Diego muralist, voice artist, and singer.'}
+>
+  <Nav />
+  <main>
+    <Hero artist={artist} totalWorks={works.length} />
+    <MuralGallery murals={grouped.mural} />
+    <About artist={artist} />
+    <MediumSection
+      id="music"
+      eyebrow="Songs in the works"
+      title="Music"
+      emptyHeadline="A voice still warming up the room."
+      emptyCopy="Original songs are being recorded now. Singles drop here when ready. Until then, watch the Instagram links below for new releases."
+      cta={{ label: 'Follow on Instagram', href: 'https://www.instagram.com/stinkyfartguy' }}
+      works={grouped.song}
+    />
+    <MediumSection
+      id="voice"
+      eyebrow="The booth"
+      title="Voice"
+      emptyHeadline="Voice work, narrations, and reads."
+      emptyCopy="Booth credits and a sample reel are landing soon. Casting directors and producers, drop a brief via the contact link below."
+      cta={{ label: 'Email a brief', href: 'mailto:GroundFloorMurals@gmail.com' }}
+      works={grouped.voiceover}
+    />
+    <MediumSection
+      id="acting"
+      eyebrow="On camera"
+      title="Acting"
+      emptyHeadline="A filmography in motion."
+      emptyCopy="Selected on-camera credits are tracked on IMDb. A self-tape reel and recent stills will appear here as productions wrap."
+      cta={{ label: 'View IMDb credits', href: 'https://www.imdb.com/name/nm9576985/' }}
+      works={grouped.acting}
+    />
+    <Press />
+    <Contact artist={artist} />
+  </main>
+  <Footer artist={artist} />
+  <Lightbox />
+</BaseLayout>

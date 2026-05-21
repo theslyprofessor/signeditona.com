@@ -1,0 +1,50 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Display serif via Google Fonts (Cormorant Garamond is a magazine-grade
+   italic display face). Loaded as a <link> from BaseLayout.astro so we
+   only ship the weights we use. */
+
+@layer base {
+  :root {
+    color-scheme: dark;
+  }
+  html {
+    scroll-behavior: smooth;
+    background: #0a0a0a;
+  }
+  body {
+    @apply bg-ink text-bone font-sans antialiased;
+    text-rendering: optimizeLegibility;
+  }
+  ::selection {
+    background: #f6f1e7;
+    color: #0a0a0a;
+  }
+  h1, h2, h3, h4 {
+    @apply font-display;
+    font-weight: 400;
+    letter-spacing: -0.01em;
+  }
+  a {
+    color: inherit;
+  }
+}
+
+@layer utilities {
+  .eyebrow {
+    @apply text-[10px] md:text-xs tracking-[0.4em] uppercase text-bone/60;
+  }
+  .max-page {
+    @apply max-w-[1600px] mx-auto px-6 md:px-12 lg:px-20;
+  }
+}
+
+@keyframes float-up {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.float-up {
+  animation: float-up 0.9s cubic-bezier(0.22, 1, 0.36, 1) both;
+}

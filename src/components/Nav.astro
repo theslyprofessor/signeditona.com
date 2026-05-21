@@ -1,0 +1,87 @@
+---
+/**
+ * Sticky top nav. Desktop = inline section links. Mobile = hamburger
+ * that toggles a full-screen drawer. Anchor-link based so /work, /about
+ * etc. all jump to sections of the single landing page (no router needed).
+ */
+const sections = [
+  { label: 'Murals', href: '/gallery' },
+  { label: 'About', href: '/#about' },
+  { label: 'Music', href: '/#music' },
+  { label: 'Voice', href: '/#voice' },
+  { label: 'Acting', href: '/#acting' },
+  { label: 'Press', href: '/#press' },
+  { label: 'Contact', href: '/#contact' },
+]
+---
+
+<nav
+  class="fixed top-0 inset-x-0 z-50 backdrop-blur-md bg-ink/70 border-b border-white/5"
+  data-nav
+>
+  <div class="max-page flex items-center justify-between h-14 md:h-16">
+    <a href="#top" class="font-display italic text-xl md:text-2xl tracking-tight">
+      Signe <span class="text-ember">Ditona</span>
+    </a>
+
+    <ul class="hidden md:flex items-center gap-8">
+      {sections.map((s) => (
+        <li>
+          <a
+            href={s.href}
+            class="text-xs tracking-[0.25em] uppercase text-bone/70 hover:text-bone transition-colors"
+          >
+            {s.label}
+          </a>
+        </li>
+      ))}
+    </ul>
+
+    <button
+      type="button"
+      class="md:hidden flex flex-col gap-1.5 p-2 -mr-2"
+      aria-label="Open menu"
+      data-menu-toggle
+    >
+      <span class="block w-6 h-px bg-bone"></span>
+      <span class="block w-6 h-px bg-bone"></span>
+      <span class="block w-6 h-px bg-bone"></span>
+    </button>
+  </div>
+</nav>
+
+<div
+  class="fixed inset-0 z-40 bg-ink/95 backdrop-blur-md flex items-center justify-center opacity-0 pointer-events-none transition-opacity duration-300"
+  data-menu-drawer
+>
+  <ul class="flex flex-col items-center gap-6 text-center">
+    {sections.map((s) => (
+      <li>
+        <a
+          href={s.href}
+          class="font-display italic text-4xl text-bone hover:text-ember transition-colors"
+          data-menu-link
+        >
+          {s.label}
+        </a>
+      </li>
+    ))}
+  </ul>
+</div>
+
+<script>
+  const toggle = document.querySelector('[data-menu-toggle]')
+  const drawer = document.querySelector('[data-menu-drawer]')
+  const links = document.querySelectorAll('[data-menu-link]')
+  function setOpen(open: boolean) {
+    if (!drawer) return
+    drawer.classList.toggle('opacity-0', !open)
+    drawer.classList.toggle('pointer-events-none', !open)
+    document.body.style.overflow = open ? 'hidden' : ''
+  }
+  toggle?.addEventListener('click', () => setOpen(true))
+  drawer?.addEventListener('click', (e) => {
+    if (e.target === drawer) setOpen(false)
+  })
+  links.forEach((l) => l.addEventListener('click', () => setOpen(false)))
+</script>

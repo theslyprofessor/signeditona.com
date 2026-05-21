@@ -1,0 +1,28 @@
+services:
+  web:
+    build: .
+    container_name: signeditona-web
+    restart: unless-stopped
+    expose:
+      - "4321"
+    labels:
+      # Main route — signe.midimaze.com (temporary subdomain until signeditona.com is purchased)
+      - "traefik.enable=true"
+      - "traefik.http.routers.signeditona.rule=Host(`signe.midimaze.com`)"
+      - "traefik.http.routers.signeditona.tls=true"
+      - "traefik.http.routers.signeditona.tls.certresolver=letsencrypt"
+      - "traefik.http.routers.signeditona.entrypoints=websecure"
+      - "traefik.http.services.signeditona.loadbalancer.server.port=4321"
+
+      # Also serve plain signeditona.com + www.signeditona.com when DNS is wired.
+      # Comment these in once the domain is purchased + pointed at the VPS.
+      # - "traefik.http.routers.signeditona-apex.rule=Host(`signeditona.com`) || Host(`www.signeditona.com`)"
+      # - "traefik.http.routers.signeditona-apex.tls=true"
+      # - "traefik.http.routers.signeditona-apex.tls.certresolver=letsencrypt"
+      # - "traefik.http.routers.signeditona-apex.entrypoints=websecure"
+    networks:
+      - dokploy-network
+
+networks:
+  dokploy-network:
+    external: true

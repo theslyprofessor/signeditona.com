@@ -1,0 +1,55 @@
+---
+import type { PortfolioArtist } from '../lib/convex'
+interface Props {
+  artist: PortfolioArtist
+}
+const { artist } = Astro.props
+const links = artist.links ?? []
+---
+
+<section
+  id="contact"
+  class="border-t border-white/5 py-20 md:py-32 bg-gradient-to-b from-ink to-neutral-950"
+>
+  <div class="max-page grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-start">
+    <div>
+      <p class="eyebrow text-ember mb-4">Reach out</p>
+      <h2 class="font-display italic text-5xl md:text-7xl leading-[0.95] mb-6">
+        Let's<br />make<br /><span class="text-ember">something.</span>
+      </h2>
+      <p class="text-bone/75 text-lg max-w-md leading-relaxed">
+        Mural commissions, voice work, song features, and feature roles
+        welcome. Send a brief, a wall, or a song.
+      </p>
+      <a
+        href="mailto:GroundFloorMurals@gmail.com"
+        class="mt-8 inline-flex items-center gap-2 bg-ember text-ink px-6 py-4 text-xs tracking-[0.3em] uppercase hover:bg-bone transition-colors"
+      >
+        GroundFloorMurals@gmail.com →
+      </a>
+    </div>
+
+    <div>
+      <p class="eyebrow text-ember mb-6">Find Signe</p>
+      <ul class="flex flex-col gap-4">
+        {links.map((l) => (
+          <li>
+            <a
+              href={l.url}
+              target="_blank"
+              rel="noreferrer"
+              class="group flex items-baseline justify-between gap-4 border-b border-white/10 py-4 hover:border-ember transition-colors"
+            >
+              <span class="font-display italic text-2xl md:text-3xl group-hover:text-ember transition-colors">
+                {l.label}
+              </span>
+              <span class="eyebrow text-bone/40 group-hover:text-ember transition-colors">
+                ↗
+              </span>
+            </a>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </div>
+</section>

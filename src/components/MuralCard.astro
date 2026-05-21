@@ -1,0 +1,55 @@
+---
+/**
+ * Clickable mural tile. Opens a lightbox dialog (#lightbox) populated
+ * with the work's metadata via data-* attributes; the lightbox script
+ * (in Lightbox.astro) reads those and hydrates the dialog content.
+ */
+import type { PortfolioWork } from '../lib/convex'
+import MuralCover from './MuralCover.astro'
+
+interface Props {
+  work: PortfolioWork
+  size?: 'sm' | 'md' | 'lg'
+}
+const { work, size = 'md' } = Astro.props
+const aspect =
+  size === 'lg' ? 'aspect-[4/5]' : size === 'sm' ? 'aspect-square' : 'aspect-[4/5]'
+
+const tags = (work.tags ?? []).join(',')
+const images = (work.imageUrls ?? []).join('|')
+---
+
+<button
+  type="button"
+  class={`group relative ${aspect} w-full overflow-hidden bg-neutral-950 cursor-zoom-in text-left`}
+  data-mural
+  data-mural-id={work._id}
+  data-mural-title={work.title}
+  data-mural-subtitle={work.subtitle ?? ''}
+  data-mural-description={work.description ?? ''}
+  data-mural-location={work.location ?? ''}
+  data-mural-year={work.year ?? ''}
+  data-mural-images={images}
+  data-mural-source={work.sourceUrl ?? ''}
+  data-mural-tags={tags}
+  data-mural-featured={work.isFeatured ? '1' : '0'}
+  aria-label={`Open ${work.title}`}
+>
+  <MuralCover work={work} large={size === 'lg'} />
+  <div
+    class="absolute inset-x-0 bottom-0 p-4 md:p-5 bg-gradient-to-t from-ink/95 via-ink/40 to-transparent translate-y-2 md:translate-y-4 md:opacity-0 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300"
+  >
+    <h3 class="font-display italic text-xl md:text-2xl leading-tight">
+      {work.title}
+    </h3>
+    {work.location && (
+      <p class="mt-1 eyebrow text-bone/65">{work.location}</p>
+    )}
+  </div>
+  <span
+    class="absolute top-3 right-3 eyebrow text-bone/40 group-hover:text-ember transition-colors"
+    aria-hidden
+  >
+    ↗
+  </span>
+</button>
