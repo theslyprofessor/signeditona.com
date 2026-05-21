@@ -6,20 +6,30 @@ services:
     expose:
       - "4321"
     labels:
-      # Main route — signe.midimaze.com (temporary subdomain until signeditona.com is purchased)
       - "traefik.enable=true"
-      - "traefik.http.routers.signeditona.rule=Host(`signe.midimaze.com`)"
-      - "traefik.http.routers.signeditona.tls=true"
-      - "traefik.http.routers.signeditona.tls.certresolver=letsencrypt"
-      - "traefik.http.routers.signeditona.entrypoints=websecure"
+
+      # Primary route — signeditona.com (apex) + www
+      - "traefik.http.routers.signeditona-apex.rule=Host(`signeditona.com`)"
+      - "traefik.http.routers.signeditona-apex.tls=true"
+      - "traefik.http.routers.signeditona-apex.tls.certresolver=letsencrypt"
+      - "traefik.http.routers.signeditona-apex.entrypoints=websecure"
       - "traefik.http.services.signeditona.loadbalancer.server.port=4321"
 
-      # Also serve plain signeditona.com + www.signeditona.com when DNS is wired.
-      # Comment these in once the domain is purchased + pointed at the VPS.
-      # - "traefik.http.routers.signeditona-apex.rule=Host(`signeditona.com`) || Host(`www.signeditona.com`)"
-      # - "traefik.http.routers.signeditona-apex.tls=true"
-      # - "traefik.http.routers.signeditona-apex.tls.certresolver=letsencrypt"
-      # - "traefik.http.routers.signeditona-apex.entrypoints=websecure"
+      # www.signeditona.com → 301 redirect to apex
+      - "traefik.http.routers.signeditona-www.rule=Host(`www.signeditona.com`)"
+      - "traefik.http.routers.signeditona-www.tls=true"
+      - "traefik.http.routers.signeditona-www.tls.certresolver=letsencrypt"
+      - "traefik.http.routers.signeditona-www.entrypoints=websecure"
+      - "traefik.http.routers.signeditona-www.middlewares=signeditona-www-redirect"
+      - "traefik.http.middlewares.signeditona-www-redirect.redirectregex.regex=^https?://www\\.signeditona\\.com(.*)"
+      - "traefik.http.middlewares.signeditona-www-redirect.redirectregex.replacement=https://signeditona.com$${1}"
+      - "traefik.http.middlewares.signeditona-www-redirect.redirectregex.permanent=true"
+
+      # Staging route — signe.midimaze.com (kept as permanent preview URL)
+      - "traefik.http.routers.signeditona-staging.rule=Host(`signe.midimaze.com`)"
+      - "traefik.http.routers.signeditona-staging.tls=true"
+      - "traefik.http.routers.signeditona-staging.tls.certresolver=letsencrypt"
+      - "traefik.http.routers.signeditona-staging.entrypoints=websecure"
     networks:
       - dokploy-network
 
