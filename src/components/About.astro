@@ -5,21 +5,37 @@ interface Props {
 }
 const { artist } = Astro.props
 const paragraphs = (artist.bio ?? '').split('\n\n').filter(Boolean)
+
+// Pull quote. Swap freely — drop in any line + source.
+const quote = {
+  text: 'They can produce some marvelous things that can uplift the community.',
+  source: 'Mary Casillas Salas, Mayor of Chula Vista · KPBS',
+}
 ---
 
 <section
   id="about"
   class="border-t border-ivory/10 py-20 md:py-32 bg-coal"
 >
-  <div class="max-page grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16">
-    <div class="lg:col-span-4">
-      <p class="eyebrow text-coral mb-3">About</p>
-      <h2 class="font-display text-6xl md:text-8xl font-medium leading-[0.98]">
-        Out <span class="text-coral">loud.</span>
-      </h2>
-    </div>
-    <div class="lg:col-span-8 space-y-6 text-lg md:text-xl leading-relaxed text-ivory/75 font-sans">
-      {paragraphs.map((p) => <p>{p}</p>)}
+  <div class="max-page">
+    <p class="eyebrow text-coral mb-10 md:mb-14">About</p>
+
+    <figure class="max-w-5xl">
+      <blockquote
+        class="font-display font-medium text-3xl md:text-5xl lg:text-6xl leading-[1.06] tracking-[-0.02em]"
+      >
+        <span class="text-coral">“</span>{quote.text}<span class="text-coral">”</span>
+      </blockquote>
+      <figcaption class="eyebrow mt-6 text-ivory/55">— {quote.source}</figcaption>
+    </figure>
+
+    <div class="mt-14 md:mt-20 grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-16">
+      <div class="lg:col-span-4">
+        <p class="eyebrow text-coral">The story</p>
+      </div>
+      <div class="lg:col-span-8 space-y-6 text-lg md:text-xl leading-relaxed text-ivory/75 font-sans">
+        {paragraphs.map((p) => <p>{p}</p>)}
+      </div>
     </div>
   </div>
 </section>
