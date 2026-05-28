@@ -1,15 +1,14 @@
 /**
  * Convex prod read client.
  *
- * Public site fetches data via the Midimaze Convex deployment
- * (amiable-moose-236). Signe's portfolio rows live in `portfolioArtists`
- * + `portfolioWorks` and are exposed via the `portfolio:*` functions.
- *
- * No mutations from this site; the CMS lives in midimaze at /signe/admin.
+ * signeditona.com has its OWN Convex deployment (successful-poodle-591),
+ * fully decoupled from midimaze. Source lives in this repo's `convex/`.
+ * Rows live in `portfolioArtists` + `portfolioWorks`, exposed via the
+ * `portfolio:*` queries. Edit-mode/CMS mutations land separately.
  */
 import { ConvexHttpClient } from 'convex/browser'
 
-const CONVEX_URL = 'https://amiable-moose-236.convex.cloud'
+const CONVEX_URL = 'https://successful-poodle-591.convex.cloud'
 export const SIGNE_SLUG = 'signe-ditona'
 
 export interface ArtistLink {
