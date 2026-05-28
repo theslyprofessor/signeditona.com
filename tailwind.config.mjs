@@ -4,19 +4,22 @@ export default {
   theme: {
     extend: {
       colors: {
-        // Barrio Contemporary palette: near-black canvas, off-white ink,
-        // heritage-vibrant pops.
-        ink: '#0E0E0F',
-        bone: '#F7F4EE',
-        ember: '#E8493A',
-        rosa: '#E0218A',
-        marigold: '#F5A623',
-        jade: '#1FA87B',
+        // Warm Editorial palette: warm light ground, espresso ink,
+        // a curated terracotta + ochre. Cute-but-powerful, professional.
+        oat: '#F3EDE3',
+        oatdeep: '#E9E0D2',
+        espresso: '#2B211B',
+        terracotta: '#E5604D',
+        clay: '#B5503D',
+        ochre: '#D9A24B',
       },
       fontFamily: {
-        // Heavy condensed poster display + clean grotesk body.
-        display: ['Anton', 'Impact', 'sans-serif'],
+        // Charming characterful serif display + clean grotesk body.
+        display: ['Fraunces', 'Georgia', 'serif'],
         sans: ['Inter', 'system-ui', 'sans-serif'],
+      },
+      borderRadius: {
+        '4xl': '2rem',
       },
     },
   },

@@ -18,23 +18,23 @@ const teasers = murals.filter((m) => !featuredIds.has(m._id)).slice(0, teaserCou
 const remaining = Math.max(0, murals.length - featured.length - teasers.length)
 ---
 
-<section id="work" class="border-t border-white/5 py-20 md:py-32">
+<section id="work" class="border-t border-espresso/10 py-20 md:py-32">
   <div class="max-page">
-    <div class="flex items-end justify-between mb-12 md:mb-20">
+    <div class="flex items-end justify-between mb-12 md:mb-16">
       <div>
-        <p class="eyebrow text-rosa mb-3">The wall</p>
-        <h2 class="font-display text-6xl md:text-8xl">Murals</h2>
+        <p class="eyebrow text-terracotta mb-3">The wall</p>
+        <h2 class="font-display text-6xl md:text-8xl font-medium">Murals</h2>
       </div>
       <a
         href="/gallery"
-        class="hidden md:inline-flex eyebrow text-bone/60 hover:text-rosa transition-colors items-center gap-2"
+        class="hidden md:inline-flex eyebrow hover:text-terracotta transition-colors items-center gap-2"
       >
         See all <span aria-hidden>→</span>
       </a>
     </div>
 
     {featured.length > 0 && (
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6 mb-10 md:mb-16">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6 mb-8 md:mb-10">
         {featured.map((m) => (
           <MuralCard work={m} size="lg" />
         ))}
@@ -54,13 +54,13 @@ const remaining = Math.max(0, murals.length - featured.length - teasers.length)
     <div class="mt-12 md:mt-16 flex flex-col md:flex-row items-start md:items-center gap-4 md:gap-6">
       <a
         href="/gallery"
-        class="inline-flex items-center gap-3 bg-rosa text-bone px-7 py-4 eyebrow hover:bg-marigold hover:text-ink transition-colors"
+        class="inline-flex items-center gap-3 rounded-full bg-terracotta px-7 py-4 text-xs font-semibold uppercase tracking-[0.28em] text-oat hover:bg-clay transition-colors"
       >
         Open full gallery
         <span aria-hidden>→</span>
       </a>
       {remaining > 0 && (
-        <p class="eyebrow text-bone/60">
+        <p class="eyebrow">
           {remaining} more in the archive
         </p>
       )}

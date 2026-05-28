@@ -1,8 +1,7 @@
 ---
 /**
- * Clickable mural tile. Opens a lightbox dialog (#lightbox) populated
- * with the work's metadata via data-* attributes; the lightbox script
- * (in Lightbox.astro) reads those and hydrates the dialog content.
+ * Clickable mural tile. Opens the lightbox dialog (#lightbox) populated
+ * from the work's data-* attributes (hydrated by Lightbox.astro).
  */
 import type { PortfolioWork } from '../lib/convex'
 import MuralCover from './MuralCover.astro'
@@ -21,7 +20,7 @@ const images = (work.imageUrls ?? []).join('|')
 
 <button
   type="button"
-  class={`group relative ${aspect} w-full overflow-hidden bg-neutral-950 cursor-zoom-in text-left`}
+  class={`group relative ${aspect} w-full overflow-hidden rounded-2xl bg-oatdeep cursor-zoom-in text-left ring-1 ring-espresso/10`}
   data-mural
   data-mural-id={work._id}
   data-mural-title={work.title}
@@ -37,17 +36,19 @@ const images = (work.imageUrls ?? []).join('|')
 >
   <MuralCover work={work} large={size === 'lg'} />
   <div
-    class="absolute inset-x-0 bottom-0 p-4 md:p-5 bg-gradient-to-t from-ink/95 via-ink/40 to-transparent translate-y-2 md:translate-y-4 md:opacity-0 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300"
+    class="absolute inset-x-0 bottom-0 p-4 md:p-5 bg-gradient-to-t from-espresso/90 via-espresso/35 to-transparent translate-y-2 md:translate-y-4 md:opacity-0 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300"
   >
-    <h3 class="font-display text-2xl md:text-3xl leading-[0.95]">
+    <h3 class="font-display font-medium text-2xl md:text-3xl leading-tight text-oat">
       {work.title}
     </h3>
     {work.location && (
-      <p class="mt-1.5 eyebrow text-marigold">{work.location}</p>
+      <p class="mt-1.5 text-[10px] font-semibold uppercase tracking-[0.24em] text-oat/75">
+        {work.location}
+      </p>
     )}
   </div>
   <span
-    class="absolute top-3 right-3 eyebrow text-bone/40 group-hover:text-rosa transition-colors"
+    class="absolute top-3 right-3 w-8 h-8 rounded-full bg-oat/85 backdrop-blur-sm flex items-center justify-center text-espresso text-sm group-hover:bg-terracotta group-hover:text-oat transition-colors"
     aria-hidden
   >
     ↗

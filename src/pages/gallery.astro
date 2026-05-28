@@ -36,18 +36,18 @@ const safeArtist =
     <section class="max-page pb-12 md:pb-16">
       <div class="flex flex-col gap-4 md:flex-row md:items-end md:justify-between mb-10 md:mb-16">
         <div>
-          <p class="eyebrow text-rosa mb-3">The archive</p>
-          <h1 class="font-display text-6xl md:text-8xl lg:text-9xl leading-[0.82]">
-            Every <span class="text-rosa">wall</span>.
+          <p class="eyebrow text-terracotta mb-3">The archive</p>
+          <h1 class="font-display text-6xl md:text-8xl lg:text-9xl font-medium leading-[0.9]">
+            Every <span class="italic font-light text-terracotta">wall</span>.
           </h1>
-          <p class="mt-4 max-w-xl text-bone/70 leading-relaxed font-sans">
+          <p class="mt-4 max-w-xl text-espresso/70 leading-relaxed font-sans">
             Tap any tile to expand. Use arrow keys or the prev / next buttons
             to walk the wall.
           </p>
         </div>
         <a
           href="/"
-          class="eyebrow text-bone/60 hover:text-rosa transition-colors self-start"
+          class="eyebrow hover:text-terracotta transition-colors self-start"
         >← Back home</a>
       </div>
 
@@ -55,13 +55,13 @@ const safeArtist =
         <div class="flex flex-wrap gap-2 mb-10" data-tag-filters>
           <button
             type="button"
-            class="eyebrow border border-bone/30 px-4 py-2 text-bone hover:border-rosa hover:text-rosa transition-colors is-active"
+            class="eyebrow rounded-full border border-espresso/40 bg-oatdeep px-4 py-2 text-espresso hover:border-terracotta hover:text-terracotta transition-colors is-active"
             data-tag="all"
           >All · {murals.length}</button>
           {tags.map((t) => (
             <button
               type="button"
-              class="eyebrow border border-bone/15 px-4 py-2 text-bone/70 hover:border-rosa hover:text-rosa transition-colors"
+              class="eyebrow rounded-full border border-espresso/15 px-4 py-2 text-espresso/60 hover:border-terracotta hover:text-terracotta transition-colors"
               data-tag={t}
             >{t}</button>
           ))}
@@ -93,10 +93,11 @@ const safeArtist =
       filters.forEach((b) => {
         const active = b === btn
         b.classList.toggle('is-active', active)
-        b.classList.toggle('border-bone/30', active)
-        b.classList.toggle('text-bone', active)
-        b.classList.toggle('border-bone/15', !active)
-        b.classList.toggle('text-bone/70', !active)
+        b.classList.toggle('border-espresso/40', active)
+        b.classList.toggle('bg-oatdeep', active)
+        b.classList.toggle('text-espresso', active)
+        b.classList.toggle('border-espresso/15', !active)
+        b.classList.toggle('text-espresso/60', !active)
       })
       tiles.forEach((tile) => {
         const tags = (tile.dataset.tileTags ?? '').split(',').filter(Boolean)

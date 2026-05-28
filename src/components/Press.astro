@@ -36,29 +36,29 @@ const outlets: Outlet[] = [
 ]
 ---
 
-<section id="press" class="border-t border-white/5 py-20 md:py-32">
+<section id="press" class="border-t border-espresso/10 py-20 md:py-32">
   <div class="max-page">
     <div class="flex items-baseline gap-6 mb-12">
-      <p class="eyebrow text-jade">In the press</p>
-      <h2 class="font-display text-5xl md:text-7xl">Press</h2>
+      <p class="eyebrow text-terracotta">In the press</p>
+      <h2 class="font-display text-5xl md:text-7xl font-medium">Press</h2>
     </div>
 
-    <ul class="divide-y divide-white/10 border-y border-white/10">
+    <ul class="divide-y divide-espresso/12 border-y border-espresso/12">
       {outlets.map((o) => (
         <li>
           <a
             href={o.url}
             target="_blank"
             rel="noreferrer"
-            class="group flex flex-col md:flex-row md:items-center md:justify-between gap-2 py-6 md:py-8 hover:bg-white/[0.02] -mx-4 px-4 transition-colors"
+            class="group flex flex-col md:flex-row md:items-center md:justify-between gap-2 py-6 md:py-8 hover:bg-espresso/[0.03] rounded-2xl -mx-4 px-4 transition-colors"
           >
             <div class="flex items-baseline gap-4 md:gap-6">
-              <span class="eyebrow text-jade w-20 shrink-0">{o.name}</span>
-              <span class="font-sans font-bold text-lg md:text-2xl leading-snug group-hover:text-jade transition-colors">
+              <span class="eyebrow text-terracotta w-20 shrink-0">{o.name}</span>
+              <span class="font-sans font-semibold text-lg md:text-2xl leading-snug group-hover:text-terracotta transition-colors">
                 {o.headline}
               </span>
             </div>
-            <div class="flex items-center gap-4 eyebrow text-bone/50 shrink-0">
+            <div class="flex items-center gap-4 eyebrow shrink-0">
               <span>{o.date}</span>
               <span aria-hidden>↗</span>
             </div>

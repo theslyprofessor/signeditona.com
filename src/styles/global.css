@@ -2,32 +2,34 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Anton (heavy condensed poster display) + Inter (grotesk body) are
-   loaded as a <link> from BaseLayout.astro. Barrio Contemporary: loud
-   uppercase display, near-black canvas, heritage-vibrant accents. */
+/* Fraunces (charming characterful serif, mixed-case) for display +
+   Inter (clean grotesk) for body. Loaded via <link> in BaseLayout.
+   Warm Editorial: warm light ground, espresso ink, terracotta accent,
+   rounded forms. Cute but powerful, professional. */
 
 @layer base {
   :root {
-    color-scheme: dark;
+    color-scheme: light;
   }
   html {
     scroll-behavior: smooth;
-    background: #0E0E0F;
+    background: #F3EDE3;
   }
   body {
-    @apply bg-ink text-bone font-sans antialiased;
+    @apply bg-oat text-espresso font-sans antialiased;
     text-rendering: optimizeLegibility;
   }
   ::selection {
-    background: #E0218A;
-    color: #0E0E0F;
+    background: #E5604D;
+    color: #F3EDE3;
   }
-  /* Display headings = Anton, uppercase poster caps. */
+  /* Display = Fraunces, mixed case, charming + heavy. Slight optical
+     softness via the font's SOFT/WONK axes set in the font request. */
   h1, h2, h3, h4 {
-    @apply font-display uppercase;
-    font-weight: 400;
-    letter-spacing: 0.005em;
-    line-height: 0.92;
+    @apply font-display;
+    font-weight: 600;
+    letter-spacing: -0.015em;
+    line-height: 0.98;
   }
   a {
     color: inherit;
@@ -36,15 +38,10 @@
 
 @layer utilities {
   .eyebrow {
-    @apply text-[10px] md:text-xs font-semibold tracking-[0.32em] uppercase;
+    @apply text-[10px] md:text-xs font-semibold tracking-[0.28em] uppercase text-espresso/55;
   }
   .max-page {
-    @apply max-w-[1600px] mx-auto px-6 md:px-12 lg:px-20;
-  }
-  /* Bold poster outline text (used for oversized ghost type). */
-  .stroke-bone {
-    -webkit-text-stroke: 1.5px rgba(247, 244, 238, 0.22);
-    color: transparent;
+    @apply max-w-[1500px] mx-auto px-6 md:px-12 lg:px-20;
   }
 }
 
