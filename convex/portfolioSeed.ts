@@ -29,7 +29,7 @@ const SIGNE_WORKS: WorkSeed[] = [
     title: "Vicente Fernández",
     subtitle: "Tribute to the king of ranchera",
     description:
-      "A heart-led tribute to Vicente Fernández, painted shortly after his passing at 81. Signe described it as coming \"really naturally, right from the heart.\" The ranchera king held deep cultural importance to her family and to the communities the studio serves. The mural lives in a community art space hosting craft fairs and art shows.",
+      "A heart-led tribute to Vicente Fernández, painted shortly after his passing at 81. Signe described it as coming \"really naturally, right from the heart.\" The ranchera king held deep cultural importance to her family and to the communities she serves. The mural lives in a community art space hosting craft fairs and art shows.",
     location: "2460 Imperial Avenue, San Diego",
     year: 2022,
     collaborators: ["Paul Jimenez"],
@@ -59,7 +59,7 @@ const SIGNE_WORKS: WorkSeed[] = [
     subtitle: "Mr. Padre",
     location: "City Heights, San Diego",
     description:
-      "Portrait of Padres legend Tony Gwynn rendered in Signe's signature photo-realism, part of Ground Floor Murals' running tribute to San Diego sports icons.",
+      "Portrait of Padres legend Tony Gwynn rendered in Signe's signature photo-realism, part of her running tribute to San Diego sports icons.",
     collaborators: ["Paul Jimenez"],
     tags: ["sports", "padres", "portrait"],
     isFeatured: true,
@@ -183,15 +183,13 @@ export const seedSigne = internalMutation({
       tagline: "Muralist. Voice. Storyteller. San Diego.",
       bio: [
         "Signe MonteFalcon Ditona is a San Diego muralist, voice artist, and singer.",
-        "She co-founded Ground Floor Murals in 2019, a public-art studio that gives back to the communities that raised her. Her hand favors photo-realism and surrealism: snow leopards rendered hair by hair, ranchera kings and Padres legends pulled from photo to wall. She is one of the official muralists of the San Diego Padres.",
+        "In 2019 she co-founded Ground Floor Murals; the public work she has made since gives back to the communities that raised her. Her hand favors photo-realism and surrealism: snow leopards rendered hair by hair, ranchera kings and Padres legends pulled from photo to wall. She is one of the official muralists of the San Diego Padres.",
         "Beyond the wall she works on camera and in the booth as a voice artist, and writes and sings her own songs. Across every medium her project is the same: instill self-love and pride in people, in heritage, and in the places that hold them.",
       ].join("\n\n"),
       location: "San Diego, California",
       accentColor: "#E8493A",
       links: [
-        { label: "Ground Floor Murals", url: "https://www.groundfloormurals.com" },
         { label: "@signeditona on Instagram", url: "https://www.instagram.com/signeditona" },
-        { label: "@groundfloormurals on Instagram", url: "https://www.instagram.com/groundfloormurals" },
         { label: "IMDb", url: "https://www.imdb.com/name/nm9576985/" },
         { label: "KPBS feature", url: "https://www.kpbs.org/news/local/2022/09/15/muralist-finds-inspiration-in-mexican-heritage" },
       ],
