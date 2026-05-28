@@ -9,28 +9,28 @@ const links = artist.links ?? []
 
 <section
   id="contact"
-  class="border-t border-espresso/10 py-20 md:py-32 bg-oatdeep"
+  class="border-t border-ivory/10 py-20 md:py-32 bg-coal"
 >
   <div class="max-page grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-start">
     <div>
-      <p class="eyebrow text-terracotta mb-4">Reach out</p>
-      <h2 class="font-display text-5xl md:text-7xl font-medium leading-[0.98] mb-6">
-        Let's make <span class="italic font-light text-terracotta">something.</span>
+      <p class="eyebrow text-coral mb-4">Reach out</p>
+      <h2 class="font-display text-5xl md:text-7xl font-medium leading-[1.0] mb-6">
+        Let's make <span class="text-coral">something.</span>
       </h2>
-      <p class="text-espresso/75 text-lg max-w-md leading-relaxed font-sans">
+      <p class="text-ivory/75 text-lg max-w-md leading-relaxed font-sans">
         Mural commissions, voice work, song features, and feature roles
         welcome. Send a brief, a wall, or a song.
       </p>
       <a
         href="mailto:GroundFloorMurals@gmail.com"
-        class="mt-8 inline-flex items-center gap-2 rounded-full bg-terracotta px-7 py-4 text-xs font-semibold uppercase tracking-[0.26em] text-oat hover:bg-clay transition-colors"
+        class="mt-8 inline-flex items-center gap-2 rounded-full bg-coral px-7 py-4 font-mono text-xs uppercase tracking-[0.16em] text-ink hover:bg-coraldark transition-colors"
       >
         GroundFloorMurals@gmail.com →
       </a>
     </div>
 
     <div>
-      <p class="eyebrow text-terracotta mb-6">Find Signe</p>
+      <p class="eyebrow text-coral mb-6">Find Signe</p>
       <ul class="flex flex-col gap-2">
         {links.map((l) => (
           <li>
@@ -38,12 +38,12 @@ const links = artist.links ?? []
               href={l.url}
               target="_blank"
               rel="noreferrer"
-              class="group flex items-baseline justify-between gap-4 border-b border-espresso/12 py-4 hover:border-terracotta transition-colors"
+              class="group flex items-baseline justify-between gap-4 border-b border-ivory/12 py-4 hover:border-coral transition-colors"
             >
-              <span class="font-sans font-semibold text-xl md:text-2xl group-hover:text-terracotta transition-colors">
+              <span class="font-sans font-semibold text-xl md:text-2xl group-hover:text-coral transition-colors">
                 {l.label}
               </span>
-              <span class="text-espresso/40 group-hover:text-terracotta transition-colors">
+              <span class="text-ivory/40 group-hover:text-coral transition-colors">
                 ↗
               </span>
             </a>

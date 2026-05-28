@@ -2,8 +2,7 @@
 /**
  * Generic section block for non-mural mediums (music, voice, acting).
  * Renders cards when populated, else a designed "coming soon" callout.
- * `accent` rotates between the two warm tones. Full literal classes so
- * Tailwind keeps them.
+ * Single coral accent, minimal.
  */
 import type { PortfolioWork } from '../lib/convex'
 interface Props {
@@ -14,39 +13,30 @@ interface Props {
   emptyCopy: string
   cta?: { label: string; href: string }
   works: PortfolioWork[]
-  accent?: 'terracotta' | 'ochre'
 }
-const { id, eyebrow, title, emptyHeadline, emptyCopy, cta, works, accent = 'terracotta' } =
-  Astro.props
-
-const ACCENT = {
-  terracotta: { text: 'text-terracotta', glow: 'rgba(229,96,77,0.12)' },
-  ochre: { text: 'text-ochre', glow: 'rgba(217,162,75,0.16)' },
-}
-const a = ACCENT[accent]
+const { id, eyebrow, title, emptyHeadline, emptyCopy, cta, works } = Astro.props
 ---
 
-<section id={id} class="border-t border-espresso/10 py-20 md:py-32">
+<section id={id} class="border-t border-ivory/10 py-20 md:py-32">
   <div class="max-page">
     <div class="flex items-baseline gap-6 mb-12">
-      <p class={`eyebrow ${a.text}`}>{eyebrow}</p>
+      <p class="eyebrow text-coral">{eyebrow}</p>
       <h2 class="font-display text-5xl md:text-7xl font-medium">{title}</h2>
     </div>
 
     {works.length === 0 ? (
       <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
         <div class="lg:col-span-7">
-          <h3 class="font-display text-4xl md:text-6xl font-medium leading-[0.98] mb-4">
+          <h3 class="font-display text-4xl md:text-6xl font-medium leading-[1.0] mb-4">
             {emptyHeadline}
           </h3>
-          <p class="text-espresso/70 text-lg max-w-xl leading-relaxed font-sans">{emptyCopy}</p>
+          <p class="text-ivory/70 text-lg max-w-xl leading-relaxed font-sans">{emptyCopy}</p>
           {cta && (
             <a
               href={cta.href}
               target="_blank"
               rel="noreferrer"
-              class={`inline-flex items-center gap-2 mt-6 rounded-full border ${a.text} px-6 py-3 text-xs font-semibold uppercase tracking-[0.28em] hover:bg-espresso hover:text-oat hover:border-espresso transition-colors`}
-              style="border-color: currentColor;"
+              class="inline-flex items-center gap-2 mt-6 rounded-full border border-ivory/30 px-6 py-3 font-mono text-xs uppercase tracking-[0.18em] text-coral hover:bg-coral hover:text-ink hover:border-coral transition-colors"
             >
               {cta.label} →
             </a>
@@ -54,20 +44,20 @@ const a = ACCENT[accent]
         </div>
         <div class="lg:col-span-5">
           <div
-            class="aspect-[4/3] w-full rounded-3xl ring-1 ring-espresso/10"
-            style={`background: radial-gradient(circle at 30% 30%, ${a.glow}, transparent 62%), #E9E0D2;`}
+            class="aspect-[4/3] w-full rounded-3xl ring-1 ring-ivory/10"
+            style="background: radial-gradient(circle at 30% 30%, rgba(217,119,87,0.14), transparent 62%), #161616;"
           ></div>
         </div>
       </div>
     ) : (
       <ul class="grid grid-cols-1 md:grid-cols-2 gap-6">
         {works.map((w) => (
-          <li class="rounded-3xl border border-espresso/12 bg-oat p-6 md:p-8 hover:border-espresso/30 transition-colors">
-            <p class={`eyebrow ${a.text} mb-3`}>{w.medium}</p>
+          <li class="rounded-3xl border border-ivory/12 bg-coal p-6 md:p-8 hover:border-ivory/30 transition-colors">
+            <p class="eyebrow text-coral mb-3">{w.medium}</p>
             <h3 class="font-display text-2xl md:text-4xl font-medium mb-2">{w.title}</h3>
-            {w.subtitle && <p class="text-espresso/65 text-sm mb-4 font-sans">{w.subtitle}</p>}
+            {w.subtitle && <p class="text-ivory/65 text-sm mb-4 font-sans">{w.subtitle}</p>}
             {w.description && (
-              <p class="text-espresso/80 leading-relaxed mb-4 font-sans">{w.description}</p>
+              <p class="text-ivory/80 leading-relaxed mb-4 font-sans">{w.description}</p>
             )}
             {w.audioUrls && w.audioUrls.length > 0 && (
               <audio controls class="w-full mt-3" src={w.audioUrls[0]}></audio>
@@ -77,7 +67,7 @@ const a = ACCENT[accent]
                 href={w.videoUrl}
                 target="_blank"
                 rel="noreferrer"
-                class={`inline-flex items-center gap-2 mt-4 eyebrow ${a.text} underline underline-offset-4`}
+                class="inline-flex items-center gap-2 mt-4 eyebrow text-coral underline underline-offset-4"
               >
                 Watch →
               </a>

@@ -14,29 +14,29 @@ const tagline = artist.tagline ?? 'Muralist. Voice. Storyteller.'
 >
   <div
     class="absolute inset-0 pointer-events-none"
-    style="background: radial-gradient(60% 45% at 15% 5%, rgba(229,96,77,0.10), transparent 65%), radial-gradient(50% 40% at 95% 90%, rgba(217,162,75,0.12), transparent 70%);"
+    style="background: radial-gradient(55% 45% at 18% 12%, rgba(217,119,87,0.10), transparent 65%);"
   >
   </div>
 
   <div class="relative flex justify-between items-start eyebrow">
-    <span class="text-terracotta">Ground Floor Murals</span>
+    <span class="text-coral">Ground Floor Murals</span>
     <span>{artist.location ?? 'San Diego, California'}</span>
   </div>
 
   <div class="relative float-up max-w-[1400px]">
-    <p class="eyebrow text-terracotta mb-5 md:mb-7">{tagline}</p>
+    <p class="eyebrow text-coral mb-5 md:mb-7">{tagline}</p>
     <h1
-      class="font-display font-medium leading-[0.92] tracking-[-0.02em] text-[18vw] md:text-[13vw] lg:text-[10.5rem]"
+      class="font-display font-medium leading-[0.95] tracking-[-0.03em] text-[19vw] md:text-[14vw] lg:text-[11rem]"
     >
-      Signe <span class="italic font-light text-terracotta">Ditona</span>
+      Signe <span class="text-coral">Ditona</span>
     </h1>
     <p
-      class="mt-7 md:mt-9 max-w-2xl text-lg md:text-2xl leading-relaxed text-espresso/80 font-sans"
+      class="mt-7 md:mt-9 max-w-2xl text-lg md:text-2xl leading-relaxed text-ivory/75 font-sans"
     >
       Muralist, voice artist, and singer based in San Diego. Co-founder of
       <a
         href="https://www.groundfloormurals.com"
-        class="font-medium underline decoration-terracotta decoration-2 underline-offset-4 hover:text-terracotta transition-colors"
+        class="font-medium underline decoration-coral decoration-2 underline-offset-4 hover:text-coral transition-colors"
         >Ground Floor Murals</a
       >. Photo-realism, surrealism, and public work that asks neighborhoods
       to love themselves out loud.
@@ -45,12 +45,12 @@ const tagline = artist.tagline ?? 'Muralist. Voice. Storyteller.'
     <div class="mt-9 flex flex-wrap gap-3 md:gap-4">
       <a
         href="#work"
-        class="inline-flex items-center gap-2 rounded-full bg-terracotta px-7 py-3.5 text-xs font-semibold uppercase tracking-[0.28em] text-oat hover:bg-clay transition-colors"
+        class="inline-flex items-center gap-2 rounded-full bg-coral px-7 py-3.5 font-mono text-xs uppercase tracking-[0.18em] text-ink hover:bg-coraldark transition-colors"
         >See the murals <span aria-hidden>↓</span></a
       >
       <a
         href="#contact"
-        class="inline-flex items-center gap-2 rounded-full border border-espresso/25 px-7 py-3.5 eyebrow hover:bg-espresso hover:text-oat hover:border-espresso transition-colors"
+        class="inline-flex items-center gap-2 rounded-full border border-ivory/25 px-7 py-3.5 font-mono text-xs uppercase tracking-[0.18em] text-ivory hover:border-coral hover:text-coral transition-colors"
         >Commission a wall</a
       >
     </div>
@@ -58,8 +58,8 @@ const tagline = artist.tagline ?? 'Muralist. Voice. Storyteller.'
 
   <div class="relative flex justify-between items-end eyebrow mt-12">
     <span>
-      <span class="text-terracotta">{String(totalWorks).padStart(3, '0')}</span> works on view
+      <span class="text-coral">{String(totalWorks).padStart(3, '0')}</span> works on view
     </span>
-    <a href="#work" class="hover:text-terracotta transition-colors">scroll ↓</a>
+    <a href="#work" class="hover:text-coral transition-colors">scroll ↓</a>
   </div>
 </header>

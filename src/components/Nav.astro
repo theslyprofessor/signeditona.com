@@ -15,15 +15,15 @@ const sections = [
 ---
 
 <nav
-  class="fixed top-0 inset-x-0 z-50 backdrop-blur-md bg-oat/80 border-b border-espresso/10"
+  class="fixed top-0 inset-x-0 z-50 backdrop-blur-md bg-ink/75 border-b border-ivory/10"
   data-nav
 >
   <div class="max-page flex items-center justify-between h-14 md:h-16">
     <a
       href="/"
-      class="font-display text-2xl md:text-3xl font-semibold tracking-[-0.01em] leading-none"
+      class="font-display text-xl md:text-2xl font-semibold tracking-[-0.02em] leading-none"
     >
-      Signe <span class="italic font-normal text-terracotta">Ditona</span>
+      Signe <span class="text-coral">Ditona</span>
     </a>
 
     <ul class="hidden md:flex items-center gap-8">
@@ -31,7 +31,7 @@ const sections = [
         <li>
           <a
             href={s.href}
-            class="text-xs font-semibold tracking-[0.22em] uppercase text-espresso/65 hover:text-terracotta transition-colors"
+            class="font-mono text-xs tracking-[0.14em] uppercase text-ivory/60 hover:text-coral transition-colors"
           >
             {s.label}
           </a>
@@ -45,15 +45,15 @@ const sections = [
       aria-label="Open menu"
       data-menu-toggle
     >
-      <span class="block w-6 h-0.5 rounded-full bg-espresso"></span>
-      <span class="block w-6 h-0.5 rounded-full bg-espresso"></span>
-      <span class="block w-6 h-0.5 rounded-full bg-espresso"></span>
+      <span class="block w-6 h-0.5 bg-ivory"></span>
+      <span class="block w-6 h-0.5 bg-ivory"></span>
+      <span class="block w-6 h-0.5 bg-ivory"></span>
     </button>
   </div>
 </nav>
 
 <div
-  class="fixed inset-0 z-40 bg-oat/97 backdrop-blur-md flex items-center justify-center opacity-0 pointer-events-none transition-opacity duration-300"
+  class="fixed inset-0 z-40 bg-ink/96 backdrop-blur-md flex items-center justify-center opacity-0 pointer-events-none transition-opacity duration-300"
   data-menu-drawer
 >
   <ul class="flex flex-col items-center gap-5 text-center">
@@ -61,7 +61,7 @@ const sections = [
       <li>
         <a
           href={s.href}
-          class="font-display text-5xl font-medium text-espresso hover:text-terracotta hover:italic transition-colors"
+          class="font-display text-5xl font-medium text-ivory hover:text-coral transition-colors"
           data-menu-link
         >
           {s.label}

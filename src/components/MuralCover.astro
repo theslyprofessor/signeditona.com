@@ -1,8 +1,6 @@
 ---
 /**
- * Tile-cover: real image when present, charming monogram tile when not.
- * Monogram alternates terracotta / ochre by title for warm variety
- * without going loud. Full literal classes so Tailwind keeps them.
+ * Tile-cover: real image when present, simple monogram tile when not.
  */
 import type { PortfolioWork } from '../lib/convex'
 interface Props {
@@ -12,12 +10,6 @@ interface Props {
 const { work, large = false } = Astro.props
 const cover = work.imageUrls?.[0]
 const initial = work.title.charAt(0).toUpperCase()
-
-const ACCENTS = [
-  { cls: 'text-terracotta/35', glow: 'rgba(229,96,77,0.12)' },
-  { cls: 'text-ochre/45', glow: 'rgba(217,162,75,0.16)' },
-]
-const accent = ACCENTS[(work.title.charCodeAt(0) + work.title.length) % ACCENTS.length]
 ---
 
 {cover ? (
@@ -30,10 +22,10 @@ const accent = ACCENTS[(work.title.charCodeAt(0) + work.title.length) % ACCENTS.
 ) : (
   <div
     class="w-full h-full flex items-center justify-center"
-    style={`background: radial-gradient(circle at 32% 22%, ${accent.glow}, transparent 62%), #E9E0D2;`}
+    style="background: radial-gradient(circle at 32% 24%, rgba(217,119,87,0.14), transparent 62%), #161616;"
   >
     <span
-      class={`font-display italic ${large ? 'text-[18vw] md:text-[10vw]' : 'text-[18vw] md:text-[8vw]'} ${accent.cls}`}
+      class={`font-display ${large ? 'text-[18vw] md:text-[10vw]' : 'text-[18vw] md:text-[8vw]'} text-coral/30`}
     >
       {initial}
     </span>

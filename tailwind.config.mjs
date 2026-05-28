@@ -4,22 +4,19 @@ export default {
   theme: {
     extend: {
       colors: {
-        // Warm Editorial palette: warm light ground, espresso ink,
-        // a curated terracotta + ochre. Cute-but-powerful, professional.
-        oat: '#F3EDE3',
-        oatdeep: '#E9E0D2',
-        espresso: '#2B211B',
-        terracotta: '#E5604D',
-        clay: '#B5503D',
-        ochre: '#D9A24B',
+        // Indie / Anthropic-flavored: true black ground, warm ivory ink,
+        // a single Claude-coral accent. Simple and minimal.
+        ink: '#0B0B0B',
+        coal: '#161616',
+        ivory: '#ECE7DD',
+        coral: '#D97757',
+        coraldark: '#C2603F',
       },
       fontFamily: {
-        // Charming characterful serif display + clean grotesk body.
-        display: ['Fraunces', 'Georgia', 'serif'],
+        // Simple geometric grotesk display + clean body + mono labels.
+        display: ['"Space Grotesk"', 'system-ui', 'sans-serif'],
         sans: ['Inter', 'system-ui', 'sans-serif'],
-      },
-      borderRadius: {
-        '4xl': '2rem',
+        mono: ['"Space Mono"', 'ui-monospace', 'monospace'],
       },
     },
   },

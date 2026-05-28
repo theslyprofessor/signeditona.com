@@ -18,16 +18,16 @@ const teasers = murals.filter((m) => !featuredIds.has(m._id)).slice(0, teaserCou
 const remaining = Math.max(0, murals.length - featured.length - teasers.length)
 ---
 
-<section id="work" class="border-t border-espresso/10 py-20 md:py-32">
+<section id="work" class="border-t border-ivory/10 py-20 md:py-32">
   <div class="max-page">
     <div class="flex items-end justify-between mb-12 md:mb-16">
       <div>
-        <p class="eyebrow text-terracotta mb-3">The wall</p>
+        <p class="eyebrow text-coral mb-3">The wall</p>
         <h2 class="font-display text-6xl md:text-8xl font-medium">Murals</h2>
       </div>
       <a
         href="/gallery"
-        class="hidden md:inline-flex eyebrow hover:text-terracotta transition-colors items-center gap-2"
+        class="hidden md:inline-flex eyebrow hover:text-coral transition-colors items-center gap-2"
       >
         See all <span aria-hidden>→</span>
       </a>
@@ -54,7 +54,7 @@ const remaining = Math.max(0, murals.length - featured.length - teasers.length)
     <div class="mt-12 md:mt-16 flex flex-col md:flex-row items-start md:items-center gap-4 md:gap-6">
       <a
         href="/gallery"
-        class="inline-flex items-center gap-3 rounded-full bg-terracotta px-7 py-4 text-xs font-semibold uppercase tracking-[0.28em] text-oat hover:bg-clay transition-colors"
+        class="inline-flex items-center gap-3 rounded-full bg-coral px-7 py-4 font-mono text-xs uppercase tracking-[0.18em] text-ink hover:bg-coraldark transition-colors"
       >
         Open full gallery
         <span aria-hidden>→</span>

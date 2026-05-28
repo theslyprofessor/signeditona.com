@@ -9,16 +9,16 @@ const paragraphs = (artist.bio ?? '').split('\n\n').filter(Boolean)
 
 <section
   id="about"
-  class="border-t border-espresso/10 py-20 md:py-32 bg-oatdeep"
+  class="border-t border-ivory/10 py-20 md:py-32 bg-coal"
 >
   <div class="max-page grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16">
     <div class="lg:col-span-4">
-      <p class="eyebrow text-terracotta mb-3">About</p>
-      <h2 class="font-display text-6xl md:text-8xl font-medium leading-[0.95]">
-        Stay <span class="italic font-light text-terracotta">grounded.</span>
+      <p class="eyebrow text-coral mb-3">About</p>
+      <h2 class="font-display text-6xl md:text-8xl font-medium leading-[0.98]">
+        Stay <span class="text-coral">grounded.</span>
       </h2>
     </div>
-    <div class="lg:col-span-8 space-y-6 text-lg md:text-xl leading-relaxed text-espresso/80 font-sans">
+    <div class="lg:col-span-8 space-y-6 text-lg md:text-xl leading-relaxed text-ivory/75 font-sans">
       {paragraphs.map((p) => <p>{p}</p>)}
     </div>
   </div>
