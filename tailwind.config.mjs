@@ -4,12 +4,18 @@ export default {
   theme: {
     extend: {
       colors: {
-        bone: '#f6f1e7',
-        ink: '#0a0a0a',
-        ember: '#e8493a',
+        // Barrio Contemporary palette: near-black canvas, off-white ink,
+        // heritage-vibrant pops.
+        ink: '#0E0E0F',
+        bone: '#F7F4EE',
+        ember: '#E8493A',
+        rosa: '#E0218A',
+        marigold: '#F5A623',
+        jade: '#1FA87B',
       },
       fontFamily: {
-        display: ['"Cormorant Garamond"', 'Georgia', 'serif'],
+        // Heavy condensed poster display + clean grotesk body.
+        display: ['Anton', 'Impact', 'sans-serif'],
         sans: ['Inter', 'system-ui', 'sans-serif'],
       },
     },

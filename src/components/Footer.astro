@@ -13,8 +13,8 @@ const year = new Date().getFullYear()
     class="max-page flex flex-col md:flex-row md:items-center md:justify-between gap-6 text-xs"
   >
     <div class="flex flex-col md:flex-row md:items-center gap-2 md:gap-6">
-      <span class="font-display italic text-lg">
-        Signe <span class="text-ember">Ditona</span>
+      <span class="font-display uppercase text-xl tracking-tight">
+        Signe <span class="text-rosa">Ditona</span>
       </span>
       <span class="text-bone/50">
         © {year}. All work shown is the artist's. All wrongs reserved.
@@ -23,7 +23,7 @@ const year = new Date().getFullYear()
     <ul class="flex flex-wrap gap-x-5 gap-y-2 text-bone/60">
       {links.map((l) => (
         <li>
-          <a href={l.url} target="_blank" rel="noreferrer" class="hover:text-ember">
+          <a href={l.url} target="_blank" rel="noreferrer" class="font-semibold hover:text-marigold">
             {l.label.replace(/ on Instagram$/, '')}
           </a>
         </li>

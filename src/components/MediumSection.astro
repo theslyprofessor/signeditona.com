@@ -3,6 +3,9 @@
  * Generic section block for non-mural mediums (music, voice, acting).
  * When works array is populated, render cards. Otherwise, render a
  * "coming soon" callout that still feels designed, not unfinished.
+ *
+ * `accent` rotates the section's pop color across the heritage palette.
+ * Classes are full literals (no interpolation) so Tailwind keeps them.
  */
 import type { PortfolioWork } from '../lib/convex'
 interface Props {
@@ -13,30 +16,40 @@ interface Props {
   emptyCopy: string
   cta?: { label: string; href: string }
   works: PortfolioWork[]
+  accent?: 'rosa' | 'marigold' | 'jade' | 'ember'
 }
-const { id, eyebrow, title, emptyHeadline, emptyCopy, cta, works } = Astro.props
+const { id, eyebrow, title, emptyHeadline, emptyCopy, cta, works, accent = 'ember' } =
+  Astro.props
+
+const ACCENT = {
+  rosa: { text: 'text-rosa', border: 'border-rosa', hover: 'hover:bg-rosa', glow: 'rgba(224,33,138,0.18)' },
+  marigold: { text: 'text-marigold', border: 'border-marigold', hover: 'hover:bg-marigold', glow: 'rgba(245,166,35,0.18)' },
+  jade: { text: 'text-jade', border: 'border-jade', hover: 'hover:bg-jade', glow: 'rgba(31,168,123,0.18)' },
+  ember: { text: 'text-ember', border: 'border-ember', hover: 'hover:bg-ember', glow: 'rgba(232,73,58,0.18)' },
+}
+const a = ACCENT[accent]
 ---
 
 <section id={id} class="border-t border-white/5 py-20 md:py-32">
   <div class="max-page">
     <div class="flex items-baseline gap-6 mb-12">
-      <p class="eyebrow text-ember">{eyebrow}</p>
-      <h2 class="font-display italic text-4xl md:text-6xl">{title}</h2>
+      <p class={`eyebrow ${a.text}`}>{eyebrow}</p>
+      <h2 class="font-display text-5xl md:text-7xl">{title}</h2>
     </div>
 
     {works.length === 0 ? (
       <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
         <div class="lg:col-span-7">
-          <h3 class="font-display italic text-3xl md:text-5xl leading-tight mb-4 text-bone/90">
+          <h3 class="font-display text-4xl md:text-6xl leading-[0.9] mb-4 text-bone">
             {emptyHeadline}
           </h3>
-          <p class="text-bone/65 text-lg max-w-xl leading-relaxed">{emptyCopy}</p>
+          <p class="text-bone/65 text-lg max-w-xl leading-relaxed font-sans">{emptyCopy}</p>
           {cta && (
             <a
               href={cta.href}
               target="_blank"
               rel="noreferrer"
-              class="inline-flex items-center gap-2 mt-6 border border-ember text-ember px-5 py-3 text-xs tracking-[0.3em] uppercase hover:bg-ember hover:text-ink transition-colors"
+              class={`inline-flex items-center gap-2 mt-6 border-2 ${a.border} ${a.text} px-5 py-3 eyebrow ${a.hover} hover:text-ink transition-colors`}
             >
               {cta.label} →
             </a>
@@ -45,7 +58,7 @@ const { id, eyebrow, title, emptyHeadline, emptyCopy, cta, works } = Astro.props
         <div class="lg:col-span-5">
           <div
             class="aspect-[4/3] w-full"
-            style="background: radial-gradient(circle at 30% 30%, rgba(232,73,58,0.18), transparent 60%), repeating-linear-gradient(45deg, rgba(255,255,255,0.02) 0 2px, transparent 2px 16px);"
+            style={`background: radial-gradient(circle at 30% 30%, ${a.glow}, transparent 60%), repeating-linear-gradient(45deg, rgba(255,255,255,0.02) 0 2px, transparent 2px 16px);`}
           ></div>
         </div>
       </div>
@@ -53,11 +66,11 @@ const { id, eyebrow, title, emptyHeadline, emptyCopy, cta, works } = Astro.props
       <ul class="grid grid-cols-1 md:grid-cols-2 gap-6">
         {works.map((w) => (
           <li class="border border-white/10 p-6 md:p-8 hover:border-bone/30 transition-colors">
-            <p class="eyebrow text-ember mb-3">{w.medium}</p>
-            <h3 class="font-display italic text-2xl md:text-3xl mb-2">{w.title}</h3>
-            {w.subtitle && <p class="text-bone/70 text-sm mb-4">{w.subtitle}</p>}
+            <p class={`eyebrow ${a.text} mb-3`}>{w.medium}</p>
+            <h3 class="font-display text-2xl md:text-4xl mb-2">{w.title}</h3>
+            {w.subtitle && <p class="text-bone/70 text-sm mb-4 font-sans">{w.subtitle}</p>}
             {w.description && (
-              <p class="text-bone/85 leading-relaxed mb-4">{w.description}</p>
+              <p class="text-bone/85 leading-relaxed mb-4 font-sans">{w.description}</p>
             )}
             {w.audioUrls && w.audioUrls.length > 0 && (
               <audio controls class="w-full mt-3" src={w.audioUrls[0]}></audio>
@@ -67,7 +80,7 @@ const { id, eyebrow, title, emptyHeadline, emptyCopy, cta, works } = Astro.props
                 href={w.videoUrl}
                 target="_blank"
                 rel="noreferrer"
-                class="inline-flex items-center gap-2 mt-4 eyebrow text-ember underline underline-offset-4"
+                class={`inline-flex items-center gap-2 mt-4 eyebrow ${a.text} underline underline-offset-4`}
               >
                 Watch →
               </a>

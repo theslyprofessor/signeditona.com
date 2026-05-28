@@ -2,9 +2,9 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Display serif via Google Fonts (Cormorant Garamond is a magazine-grade
-   italic display face). Loaded as a <link> from BaseLayout.astro so we
-   only ship the weights we use. */
+/* Anton (heavy condensed poster display) + Inter (grotesk body) are
+   loaded as a <link> from BaseLayout.astro. Barrio Contemporary: loud
+   uppercase display, near-black canvas, heritage-vibrant accents. */
 
 @layer base {
   :root {
@@ -12,20 +12,22 @@
   }
   html {
     scroll-behavior: smooth;
-    background: #0a0a0a;
+    background: #0E0E0F;
   }
   body {
     @apply bg-ink text-bone font-sans antialiased;
     text-rendering: optimizeLegibility;
   }
   ::selection {
-    background: #f6f1e7;
-    color: #0a0a0a;
+    background: #E0218A;
+    color: #0E0E0F;
   }
+  /* Display headings = Anton, uppercase poster caps. */
   h1, h2, h3, h4 {
-    @apply font-display;
+    @apply font-display uppercase;
     font-weight: 400;
-    letter-spacing: -0.01em;
+    letter-spacing: 0.005em;
+    line-height: 0.92;
   }
   a {
     color: inherit;
@@ -34,10 +36,15 @@
 
 @layer utilities {
   .eyebrow {
-    @apply text-[10px] md:text-xs tracking-[0.4em] uppercase text-bone/60;
+    @apply text-[10px] md:text-xs font-semibold tracking-[0.32em] uppercase;
   }
   .max-page {
     @apply max-w-[1600px] mx-auto px-6 md:px-12 lg:px-20;
+  }
+  /* Bold poster outline text (used for oversized ghost type). */
+  .stroke-bone {
+    -webkit-text-stroke: 1.5px rgba(247, 244, 238, 0.22);
+    color: transparent;
   }
 }
 

@@ -1,8 +1,8 @@
 ---
 /**
  * Tile-cover: real image when present, typographic monogram tile when
- * not. Keeps the gallery visually populated even before Signe uploads
- * proper image URLs into the CMS.
+ * not. Monogram color rotates across the heritage palette by title so
+ * the placeholder gallery reads as a vibrant mosaic, not uniform red.
  */
 import type { PortfolioWork } from '../lib/convex'
 interface Props {
@@ -12,6 +12,15 @@ interface Props {
 const { work, large = false } = Astro.props
 const cover = work.imageUrls?.[0]
 const initial = work.title.charAt(0).toUpperCase()
+
+// Full literal classes (no interpolation) so Tailwind's scanner keeps them.
+const ACCENTS = [
+  { cls: 'text-rosa/40', glow: 'rgba(224,33,138,0.20)' },
+  { cls: 'text-marigold/40', glow: 'rgba(245,166,35,0.20)' },
+  { cls: 'text-jade/40', glow: 'rgba(31,168,123,0.20)' },
+  { cls: 'text-ember/40', glow: 'rgba(232,73,58,0.20)' },
+]
+const accent = ACCENTS[(work.title.charCodeAt(0) + work.title.length) % ACCENTS.length]
 ---
 
 {cover ? (
@@ -24,10 +33,10 @@ const initial = work.title.charAt(0).toUpperCase()
 ) : (
   <div
     class="w-full h-full flex items-center justify-center"
-    style="background: radial-gradient(circle at 30% 20%, rgba(232,73,58,0.18), transparent 60%), #0a0a0a;"
+    style={`background: radial-gradient(circle at 30% 20%, ${accent.glow}, transparent 60%), #0E0E0F;`}
   >
     <span
-      class={`font-display italic ${large ? 'text-[18vw] md:text-[10vw]' : 'text-[18vw] md:text-[8vw]'} text-ember/30`}
+      class={`font-display ${large ? 'text-[18vw] md:text-[10vw]' : 'text-[18vw] md:text-[8vw]'} ${accent.cls}`}
     >
       {initial}
     </span>
