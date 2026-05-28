@@ -6,6 +6,12 @@ import Lightbox from '../components/Lightbox.astro'
 import Footer from '../components/Footer.astro'
 import { fetchArtist, fetchWorks } from '../lib/convex'
 
+// Public apex shows the holding page; gallery only on staging/localhost.
+const host = Astro.request.headers.get('host') ?? ''
+if (host.endsWith('signeditona.com')) {
+  return Astro.redirect('/')
+}
+
 const [artist, works] = await Promise.all([fetchArtist(), fetchWorks()])
 const murals = works.filter((w) => w.medium === 'mural').sort((a, b) => {
   const ao = a.sortOrder ?? 0

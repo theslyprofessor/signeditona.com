@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro'
+import ComingSoon from '../components/ComingSoon.astro'
 import Nav from '../components/Nav.astro'
 import Hero from '../components/Hero.astro'
 import MuralGallery from '../components/MuralGallery.astro'
@@ -11,67 +12,88 @@ import Footer from '../components/Footer.astro'
 import Lightbox from '../components/Lightbox.astro'
 import { fetchArtist, fetchWorks, groupByMedium } from '../lib/convex'
 
-let artist = await fetchArtist()
-let works = await fetchWorks()
+// Public apex (signeditona.com / www) shows the holding page. The staging
+// host (signe.midimaze.com) and localhost serve the full site as preview.
+const host = Astro.request.headers.get('host') ?? ''
+const comingSoon = host.endsWith('signeditona.com')
 
-// Defensive fallback so the site still renders if Convex is unreachable.
-if (!artist) {
-  artist = {
-    _id: 'fallback',
-    slug: 'signe-ditona',
-    displayName: 'Signe Ditona',
-    tagline: 'Muralist. Voice. Storyteller.',
-    bio: 'San Diego muralist, voice artist, and singer.',
-    location: 'San Diego, California',
-    accentColor: '#E8493A',
-    links: [],
-    isPublic: true,
+let artist = null
+let works: Awaited<ReturnType<typeof fetchWorks>> = []
+let grouped = { mural: [], song: [], voiceover: [], acting: [] } as ReturnType<
+  typeof groupByMedium
+>
+
+if (!comingSoon) {
+  artist = await fetchArtist()
+  works = await fetchWorks()
+  if (!artist) {
+    artist = {
+      _id: 'fallback',
+      slug: 'signe-ditona',
+      displayName: 'Signe Ditona',
+      tagline: 'Muralist. Voice. Storyteller.',
+      bio: 'San Diego muralist, voice artist, and singer.',
+      location: 'San Diego, California',
+      accentColor: '#D97757',
+      links: [],
+      isPublic: true,
+    }
   }
+  grouped = groupByMedium(works)
 }
-
-const grouped = groupByMedium(works)
 ---
 
-<BaseLayout
-  title="Signe Ditona · Muralist, Voice, Singer"
-  description={artist.bio?.split('\n\n')[0] ??
-    'Portfolio of Signe Ditona. San Diego muralist, voice artist, and singer.'}
->
-  <Nav />
-  <main>
-    <Hero artist={artist} totalWorks={works.length} />
-    <MuralGallery murals={grouped.mural} />
-    <About artist={artist} />
-    <MediumSection
-      id="music"
-      eyebrow="Songs in the works"
-      title="Music"
-      emptyHeadline="A voice still warming up the room."
-      emptyCopy="Original songs are being recorded now. Singles drop here when ready. Until then, watch the Instagram links below for new releases."
-      cta={{ label: 'Follow on Instagram', href: 'https://www.instagram.com/signeditona' }}
-      works={grouped.song}
-    />
-    <MediumSection
-      id="voice"
-      eyebrow="The booth"
-      title="Voice"
-      emptyHeadline="Voice work, narrations, and reads."
-      emptyCopy="Booth credits and a sample reel are landing soon. Casting directors and producers, drop a brief via the contact link below."
-      cta={{ label: 'Email a brief', href: 'mailto:info@signeditona.com' }}
-      works={grouped.voiceover}
-    />
-    <MediumSection
-      id="acting"
-      eyebrow="On camera"
-      title="Acting"
-      emptyHeadline="A filmography in motion."
-      emptyCopy="Selected on-camera credits are tracked on IMDb. A self-tape reel and recent stills will appear here as productions wrap."
-      cta={{ label: 'View IMDb credits', href: 'https://www.imdb.com/name/nm9576985/' }}
-      works={grouped.acting}
-    />
-    <Press />
-    <Contact artist={artist} />
-  </main>
-  <Footer artist={artist} />
-  <Lightbox />
-</BaseLayout>
+{
+  comingSoon ? (
+    <BaseLayout
+      title="Signe Ditona — Coming soon"
+      description="Signe Ditona — San Diego muralist, voice artist, and singer. New site coming soon."
+    >
+      <ComingSoon />
+    </BaseLayout>
+  ) : (
+    <BaseLayout
+      title="Signe Ditona · Muralist, Voice, Singer"
+      description={artist.bio?.split('\n\n')[0] ??
+        'Portfolio of Signe Ditona. San Diego muralist, voice artist, and singer.'}
+    >
+      <Nav />
+      <main>
+        <Hero artist={artist} totalWorks={works.length} />
+        <MuralGallery murals={grouped.mural} />
+        <About artist={artist} />
+        <MediumSection
+          id="music"
+          eyebrow="Songs in the works"
+          title="Music"
+          emptyHeadline="A voice still warming up the room."
+          emptyCopy="Original songs are being recorded now. Singles drop here when ready. Until then, watch the Instagram links below for new releases."
+          cta={{ label: 'Follow on Instagram', href: 'https://www.instagram.com/signeditona' }}
+          works={grouped.song}
+        />
+        <MediumSection
+          id="voice"
+          eyebrow="The booth"
+          title="Voice"
+          emptyHeadline="Voice work, narrations, and reads."
+          emptyCopy="Booth credits and a sample reel are landing soon. Casting directors and producers, drop a brief via the contact link below."
+          cta={{ label: 'Email a brief', href: 'mailto:info@signeditona.com' }}
+          works={grouped.voiceover}
+        />
+        <MediumSection
+          id="acting"
+          eyebrow="On camera"
+          title="Acting"
+          emptyHeadline="A filmography in motion."
+          emptyCopy="Selected on-camera credits are tracked on IMDb. A self-tape reel and recent stills will appear here as productions wrap."
+          cta={{ label: 'View IMDb credits', href: 'https://www.imdb.com/name/nm9576985/' }}
+          works={grouped.acting}
+        />
+        <Press />
+        <Contact artist={artist} />
+      </main>
+      <Footer artist={artist} />
+      <Lightbox />
+    </BaseLayout>
+  )
+}
